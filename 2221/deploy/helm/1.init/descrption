@@ -1,0 +1,22 @@
+api-tester 메인앱
+charts directory 나한텐 없는데(sub app 배포 용 yaml 파일 두는곳
+.helmignore 깃 이그노어 처럼, 배제할 렌더링시 제외 파일 배포 안할 yaml 파일
+chart.yaml 차트 기본정보 선언
+values.yaml 배포될  yaml 파일에 들어가 있는 변수들의 기본값 선언 정말 중요
+helm install api-tester-32222 ./app -set port='80' 이렇게 할 때의 값
+
+간단한 기능 헬름에서제공하는
+
+_helpers 잘 모르겠다. char.yaml
+
+notes.txt readme 역할
+
+chart testes director
+\
+
+
+deleting에 무엇은 하는가'
+
+
+스텝 3가 진짜다.
+내 프로젝트에 맞게 하기!!
