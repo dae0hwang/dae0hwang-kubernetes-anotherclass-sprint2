@@ -5,14 +5,12 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   #helm install api-tester-2221(이값이api-tester.fullname) ./api-tester -n anotherclass-222
-  #name: {{ include "api-tester.fullname" . }}
   #추가해줘야한다.
   name: {{ include "api-tester.fullname" . }}-properties
   labels:
     {{- include "api-tester.labels" . | nindent 4 }}
 data:
   # deployment resource 지정하는 방식 가져와서 똑같이
-  # {{- toYaml .Values.resources | nindent 12 }}
   #nindent 12 칸 띄어라
   #두칸 띄어져 있는데. -의미는 이 값이 출력될때 왼쪽 여백 다없앤다.
 #spring_profiles_active: "dev"
