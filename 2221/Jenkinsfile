@@ -33,7 +33,7 @@ pipeline {
 
         stage('릴리즈파일 체크아웃') {
             steps {
-                checkout scmGit(branches: [[name: '*/main']],
+                checkout scmGit(branches: [[name: '*/master']],
                     extensions: [[$class: 'SparseCheckoutPaths',
                     sparseCheckoutPaths: [[path: "/${CLASS_NUM}"]]]],
 					userRemoteConfigs: [[url: "${GITHUB_URL}"]])
