@@ -3,7 +3,7 @@ replicaCount: 2
 
 image:
   # 이미지 와 폴리시도 수정
-  repository: 1pro/api-tester
+  repository: hwangdy/api-tester
   pullPolicy: Always
   # chart.yaml version 정보에 v1.0.0이것 넣어주면 알아서 1pro/api-tester:v1.0.0
   # Overrides the image tag whose default is the chart appVersion.
