@@ -40,35 +40,35 @@ pipeline {
             }
         }
 
-        stage('컨테이너 빌드') {
-            steps {
-                // jar 파일 복사
-                sh "cp ./build/libs/app-0.0.1-SNAPSHOT.jar ./${CLASS_NUM}/build/docker/app-0.0.1-SNAPSHOT.jar"
+        // stage('컨테이너 빌드') {
+        //     steps {
+        //         // jar 파일 복사
+        //         sh "cp ./build/libs/app-0.0.1-SNAPSHOT.jar ./${CLASS_NUM}/build/docker/app-0.0.1-SNAPSHOT.jar"
 
-                // 도커 빌드
-                sh "docker build -t ${DOCKERHUB_USERNAME}/api-tester:v1.0.0 ./${CLASS_NUM}/build/docker"
-            }
-        }
+        //         // 도커 빌드
+        //         sh "docker build -t ${DOCKERHUB_USERNAME}/api-tester:v1.0.0 ./${CLASS_NUM}/build/docker"
+        //     }
+        // }
 
-        stage('컨테이너 업로드') {
-            steps {
-                // DockerHub로 이미지 업로드
-                sh "docker push ${DOCKERHUB_USERNAME}/api-tester:v1.0.0"
-            }
-        }
-        // 수정
-        stage('헬름 템플릿 확인') {
-            steps {
-                // K8S 배포
-                sh "helm template api-tester-${CLASS_NUM} ./${CLASS_NUM}/deploy/helm/5.custom/api-tester -n anotherclass-222 --create-namespace"
-            }
-        }
+        // stage('컨테이너 업로드') {
+        //     steps {
+        //         // DockerHub로 이미지 업로드
+        //         sh "docker push ${DOCKERHUB_USERNAME}/api-tester:v1.0.0"
+        //     }
+        // }
+        // // 수정
+        // stage('헬름 템플릿 확인') {
+        //     steps {
+        //         // K8S 배포
+        //         sh "helm template api-tester-${CLASS_NUM} ./${CLASS_NUM}/deploy/helm/5.custom/api-tester -n anotherclass-222 --create-namespace"
+        //     }
+        // }
 
-        stage('헬름 배포') {
-            steps {
-                input message: '배포 시작', ok: "Yes"
-                sh "helm upgrade api-tester-${CLASS_NUM} ./${CLASS_NUM}/deploy/helm/5.custom/api-tester -n anotherclass-222 --create-namespace --install"
-            }
-        }
+        // stage('헬름 배포') {
+        //     steps {
+        //         input message: '배포 시작', ok: "Yes"
+        //         sh "helm upgrade api-tester-${CLASS_NUM} ./${CLASS_NUM}/deploy/helm/5.custom/api-tester -n anotherclass-222 --create-namespace --install"
+        //     }
+        // }
     }
 }
