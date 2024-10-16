@@ -26,8 +26,8 @@ pipeline {
         stage('소스 빌드') {
             steps {
                 // 755권한 필요 (윈도우에서 Git으로 소스 업로드시 권한은 644)
-                echo "chmod +x ./gradlew"
-                echo "gradle clean build"
+                sh "chmod +x ./gradlew"
+                sh "gradle clean build"
             }
         }
 
@@ -43,17 +43,17 @@ pipeline {
         stage('컨테이너 빌드') {
             steps {
                 // jar 파일 복사
-                echo "cp ./build/libs/app-0.0.1-SNAPSHOT.jar ./${CLASS_NUM}/build/docker/app-0.0.1-SNAPSHOT.jar"
+                sh "cp ./build/libs/app-0.0.1-SNAPSHOT.jar ./${CLASS_NUM}/build/docker/app-0.0.1-SNAPSHOT.jar"
 
                 // 도커 빌드
-                echo "docker build -t ${DOCKERHUB_USERNAME}/api-tester:v1.0.0 ./${CLASS_NUM}/build/docker"
+                sh "docker build -t ${DOCKERHUB_USERNAME}/api-tester:v1.0.0 ./${CLASS_NUM}/build/docker"
             }
         }
 
         stage('컨테이너 업로드') {
             steps {
                 // DockerHub로 이미지 업로드
-                echo "docker push ${DOCKERHUB_USERNAME}/api-tester:v1.0.0"
+                sh "docker push ${DOCKERHUB_USERNAME}/api-tester:v1.0.0"
             }
         }
         // 수정
